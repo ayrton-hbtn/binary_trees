@@ -63,13 +63,13 @@ size_t _pow(size_t x, size_t y)
   */
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-	size_t h = get_height(tree) - 1;
+	size_t h = get_height(tree);
 	size_t n = binary_tree_size(tree);
 
 	if (tree == NULL)
 		return (0);
 
-	if (_pow(2, h + 1) - 1 == n)
+	if (_pow(2, h) - 1 == n)
 		return (1);
 
 	return (0);
