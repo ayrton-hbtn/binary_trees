@@ -1,41 +1,28 @@
 #include "binary_trees.h"
 
 /**
-  * max - returns max between two numbers
-  * @a: first number
-  * @b: second number
-  * Return: max between a and b
-  */
-size_t max(size_t a, size_t b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}
-
-/**
-  * get_height - measures the height of a binary tree
-  * @tree: tree to measure
-  * Return: height of tree, 0 if tree is NULL
-  */
-size_t get_height(const binary_tree_t *tree)
-{
-	if (tree == NULL)
-		return (0);
-
-	return (1 + max(get_height(tree->left), get_height(tree->right)));
-}
-
-/**
-  * binary_tree_height - measures the height of a binary tree
-  * @tree: tree to measure
-  * Return: height of tree, 0 if tree is NULL
-  */
+ * binary_tree_height - function that measures the height of a binary tree
+ * @tree: pointer to the root node
+ * Return: height of binary tree, 0 if NULL
+ */
 size_t binary_tree_height(const binary_tree_t *tree)
 {
-	size_t height = get_height(tree);
+	size_t l_height = 0, r_height = 0;
 
-	return (height);
+	if (tree)
+	{
+		if (tree->left)
+			l_height = binary_tree_height(tree->left) + 1;
+		if (tree->right)
+			r_height = binary_tree_height(tree->right) + 1;
+
+		if (l_height >= r_height)
+			return (l_height);
+		else
+			return (r_height);
+	}
+	else
+		return (0);
 }
 
 /**
@@ -67,7 +54,7 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
 	if (func == NULL || tree == NULL)
 		return;
-	int height = binary_tree_height(tree);
+	int height = binary_tree_height(tree) + 1;
 	int i;
 
 	for (i = 0; i <= height; i++)
