@@ -1,29 +1,28 @@
 #include "binary_trees.h"
 
 /**
-  * max - returns max between two numbers
-  * @a: first number
-  * @b: second number
-  * Return: max between a and b
-  */
-int max(size_t a, size_t b)
+ * binary_tree_height - function that measures the height of a binary tree
+ * @tree: pointer to the root node
+ * Return: height of binary tree, 0 if NULL
+ */
+size_t binary_tree_height(const binary_tree_t *tree)
 {
-	if (a > b)
-		return (a);
-	return (b);
-}
+	size_t l_height = 0, r_height = 0;
 
-/**
-  * get_height - measures the height of a binary tree
-  * @tree: tree to measure
-  * Return: height of tree, 0 if tree is NULL
-  */
-int get_height(const binary_tree_t *tree)
-{
-	if (tree == NULL)
+	if (tree)
+	{
+		if (tree->left)
+			l_height = binary_tree_height(tree->left) + 1;
+		if (tree->right)
+			r_height = binary_tree_height(tree->right) + 1;
+
+		if (l_height >= r_height)
+			return (l_height);
+		else
+			return (r_height);
+	}
+	else
 		return (0);
-
-	return (1 + max(get_height(tree->right), get_height(tree->left)));
 }
 
 /**
@@ -33,12 +32,17 @@ int get_height(const binary_tree_t *tree)
   */
 int binary_tree_balance(const binary_tree_t *tree)
 {
-	int balance = 0;
+	int balance = 0, l_height = 0, r_height = 0;
 
-	int left_t = get_height(tree->left);
-	int right_t = get_height(tree->right);
+	if (!tree)
+		return (0);
 
-	balance = left_t - right_t;
+	if (tree->left)
+		l_height = binary_tree_height(tree->left) + 1;
+	if (tree->right)
+		r_height = binary_tree_height(tree->right) + 1;
+
+	balance = l_height - r_height;
 
 	return (balance);
 }
