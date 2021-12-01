@@ -33,9 +33,6 @@ int get_height(const binary_tree_t *tree)
   */
 int binary_tree_balance(const binary_tree_t *tree)
 {
-	if (tree == NULL)
-		return (0);
-
 	int balance = 0;
 
 	int left_t = get_height(tree->left);
