@@ -6,7 +6,8 @@
   * @second: second node
   * Return: common ancestor node, or NULL if not found
   */
-binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second)
+binary_tree_t *binary_trees_ancestor(
+		const binary_tree_t *first, const binary_tree_t *second)
 {
 	size_t h_first, h_second;
 
