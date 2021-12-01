@@ -38,8 +38,6 @@ binary_tree_t *binary_trees_ancestor(
 
 	if (!first || !second)
 		return (NULL);
-	if (!first->parent || !second->parent)
-		return (NULL);
 
 	if (first->parent == second->parent)
 		return (first->parent);
